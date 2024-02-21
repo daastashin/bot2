@@ -1,23 +1,22 @@
 package com.example.bot2
 
-import org.springframework.stereotype.Service
 import org.telegram.telegrambots.bots.TelegramLongPollingBot
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage
 import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow
 
-//@Service
-class MyBot(token: String): TelegramLongPollingBot(token) {
+class MyBot(private val token: String?,
+        private val botUserName: String?): TelegramLongPollingBot(token) {
 
     val apiReq = ApiRequester()
 
-    override fun getBotUsername(): String {
-        return "DaniilAstashinBot"
+    override fun getBotUsername(): String? {
+        return botUserName
     }
 
-    override fun getBotToken(): String {
-        return "6253483668:AAF4kCAkF-YUJ2klhbDV7vQa9b7ki4vH2e4"
+    override fun getBotToken(): String? {
+        return token
     }
 
     override fun onUpdateReceived(p0: Update) {
